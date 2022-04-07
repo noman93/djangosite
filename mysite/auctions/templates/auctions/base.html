@@ -1,0 +1,113 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}E-Auctions{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+        
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    </head>
+    <body>
+
+    <div class="d-flex flex-column min-vh-100">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand crop" href="{% url 'index' %}">
+                    <img src="{% static 'auctions/images/logo.png' %}" alt="no">
+                </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                
+
+                <ul class="navbar-nav ml-auto">
+                    <p class="navbar-text">
+                        {% if user.is_authenticated %}
+                            Signed in as <strong>{{ user.username }}</strong>.
+                        {% else %}
+
+                        {% endif %}
+                    </p>
+
+                    <li class="nav-item">
+                        {% if user.is_authenticated %}
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        {% else %}
+                            <ul class="navbar-nav ml-auto">
+                                <a class="nav-link" href="{% url 'register' %}">Register</a>
+                                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                            </ul>
+                        {% endif %}
+                    </p>
+
+
+                </ul>
+            </div>
+        </nav>
+
+        <main class="flex-fill">
+
+        {% block body %}
+        {% endblock %}
+
+        </main>
+        
+    </body>
+
+    
+    
+        <footer class="footer mt-4 pt-4">
+            <div class="container">
+
+
+                    <!-- Social buttons -->
+
+                    
+                <ul class="list-unstyled list-inline text-center">
+
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/home" class="btn-floating mx-1" style="color: white;">
+                            <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 "></i>
+                        </a>
+                    </li>
+
+                    <li class="list-inline-item">
+                        <a href="mailto:shuvo5312@gmail.com" class="btn-floating mx-1" style="color: white;">
+                            <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3"></i> 
+                        </a>
+                    </li>
+
+                    <li class="list-inline-item">
+                        <a href="https://www.linkedin.com/in/abdullah-al-noman-9098a0138/" class="btn-floating mx-1" style="color: white;">
+                            <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3"></i>
+                        </a>
+                    </li>
+
+                    <li class="list-inline-item">
+                        <a href="https://github.com/noman93" class="btn-floating mx-1" style="color: white;">
+                            <i class="fab fa-github fa-lg mr-md-5 mr-3"></i> 
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+        <div class="footer-copyright text-center py-1" style="color: white;">© 2022 Copyright - Abdullah Al Noman</div>
+
+            
+        </footer>
+    </div>
+
+
+</html>

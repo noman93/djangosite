@@ -1,0 +1,145 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar {
+    border-bottom: 1px solid #7e4d72;
+}
+
+.btn.btn-primary {
+    background: #ec8f6a;
+    border-color: #ec8f6a;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #AA6800;
+}
+
+.btn.btn-outline-primary {
+    color: #ec8f6a;
+    border-color: white;
+}
+
+.btn.btn-outline-primary:hover {
+    color: white;
+    border-color: white;
+    background-color: #ec8f6a;
+}
+
+.btn.btn-secondary {
+    color: #fff;
+    border-color: #8bbabb;
+    background: #8bbabb;
+}
+
+.btn-secondary:hover {
+    background-color: #51606E;
+}
+
+.btn.btn-outline-secondary {
+    color: #8bbabb;
+    border-color: white;
+}
+
+.btn.btn-outline-secondary:hover {
+    color: white;
+    border-color: white;
+    background-color: #8bbabb;
+}
+
+.btn.btn-quarternary {
+    color: #fff;
+    border-color: #b96b9f;
+    background: #b96b9f;
+}
+
+.btn-quarternary:hover {
+    background-color: #ec8f6a;
+}
+
+.btn.btn-outline-quaternary {
+    color: white;
+}
+
+.btn.btn-outline-quaternary:hover {
+    background-color: #AA6800;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+.footer {
+    background-color: #9DADBC;
+}
+
+.footer-copyright {
+    background-color: #51606E;
+}
+
+.crop {
+    width: 150px;
+    height: 70px;
+    overflow: hidden;
+}
+
+.crop img {
+    width: 250px;
+    height: 250px;
+    margin: -90px 0 -25px -50px;
+}
+
+.login_crop {
+    width: 250px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.login_crop img {
+    width: 350px;
+    height: 350px;
+    margin: -130px 0 -25px -30px;
+}
+
+.register_crop {
+    width: 250px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.register_crop img {
+    width: 350px;
+    height: 350px;
+    margin: -130px 0 -25px -30px;
+}
+
+.wrapper {
+    margin: 80px auto;
+}
+
+.form-signin {
+    max-width: 380px;
+    min-width: 380px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    padding: 15px 40px 50px;
+    border: 1px solid #7e4d72;
+    border-radius: 20px;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 30px;
+}
+
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.form-signin .form-control {
+    padding: 10px;
+}
