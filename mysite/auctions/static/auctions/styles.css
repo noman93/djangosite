@@ -143,3 +143,83 @@
 .form-signin .form-control {
     padding: 10px;
 }
+
+.new_listing {
+    max-width: 800px;
+    min-width: 320px;
+    margin: 0 auto;
+    padding: 15px 40px 50px;
+    border: 1px solid #7e4d72;
+}
+
+.specific-textarea {
+    height: 100px !important;
+}
+
+.comment-textarea {
+    height: 80px !important;
+}
+
+.embed-responsive .card-img-top {
+    object-fit: cover;
+}
+
+
+/****** Auction Listings *******/
+
+#auction_listings {
+    padding: 30px 0px;
+}
+
+#auction_listings h1 {
+    font-weight: 900;
+    font-size: 34px;
+    padding-bottom: 5px;
+}
+
+.title {
+    text-align: center;
+}
+
+.title p {
+    font-size: 18px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.card-text {
+    font-size: 15px;
+}
+
+.card-body {
+    box-shadow: 0 0 20px 7px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    margin: 20px 10px;
+}
+
+.card-body a {
+    color: #0c7f90;
+    text-decoration: none;
+    font-size: 15px;
+    margin-top: auto;
+    font-weight: 600;
+}
+
+.card-body a:hover {
+    color: #63a6b0;
+    text-decoration: none;
+}
+
+.listing-price {
+    font-size: 20px;
+}
+
+.errorlist {
+    list-style: none;
+    color: red;
+}

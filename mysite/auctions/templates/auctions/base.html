@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>{% block title %}E-Auctions{% endblock %}</title>
+        <title>{% block title %}Online-Auctions{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -29,7 +29,23 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+                    </li>
+        
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'watchlist' %}">
+                            Watchlist
+                            <span class="badge badge-primary badge-pill">{{ user.watchlist.count }}</span>
+                        </a>
+    
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'createlisting' %}">Create Listing</a>
+                    </li>
+                </ul>
 
                 <ul class="navbar-nav ml-auto">
                     <p class="navbar-text">

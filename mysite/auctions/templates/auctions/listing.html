@@ -1,0 +1,271 @@
+{% extends "auctions/base.html" %} 
+{% load static %}
+
+{% block body %}
+
+
+<div class="container pt-4 my-container ">
+
+    {% if user.username == listing.highest_bidder and listing.status == 'Closed' %}
+        <div class="alert alert-success" role="alert">
+            Congratulations, you have won this auction! 
+        </div>
+    {% endif %}
+
+    <div class="col">
+        <div class="row">
+            <h4 class="title font-weight-bold">{{listing.title}}</h4>
+        </div>
+        <div class="row">
+            {% if listing.status == "Open"%}
+                <p><i>Auction {{ listing.status }}</i></p>
+            {% else %}
+                <p><i>Auction {{ listing.status }}</i></p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row my-row">
+
+        <div class="col-md-6 my-col">
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-interval="false">
+                <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="{{listing.image_url}}" onerror="this.onerror=null;this.src='{% static "auctions/images/placeholderimage.png" %}';" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{{listing.image_url}}" onerror="this.onerror=null;this.src='{% static "auctions/images/placeholderimage.png" %}';" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{{listing.image_url}}" onerror="this.onerror=null;this.src='{% static "auctions/images/placeholderimage.png" %}';" alt="Third slide">
+                </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+            {% if user.is_authenticated %}
+                {% if listing.user_id == user.id %}
+                    <div class="d-flex justify-content-center mt-2">
+                        <p><b>You</b> own this auction!</p> 
+                    </div>
+                {% elif not user_watchlist %}
+                    <form action="{% url 'watchlist' %}" method="POST">
+                    {% csrf_token %}
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn mt-2 mb-2 mb-md-0 btn-outline-primary btn-block"><span>ADD TO WATCHLIST</span>
+                                <div class="icon d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-eye fa-lg mt-1"></i>
+                                </div>
+                            </button>
+                            <input type="hidden" name="listing_id" value="{{listing.id}}"/>
+                            <input type="hidden" name="to_watchlist" value="add_to_watchlist"/>
+                        </div>
+                {% else %}
+                    <form action="{% url 'watchlist' %}" method="POST">
+                    {% csrf_token %}
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn mt-2 mb-2 mb-md-0 btn-outline-secondary btn-block"><span>REMOVE FROM WATCHLIST</span>
+                                <div class="icon d-flex align-items-center justify-content-center">
+                                    <i class="fas fa-eye-slash fa-lg mt-1"></i>
+                                </div>
+                            </button>
+                            <input type="hidden" name="listing_id" value="{{listing.id}}"/>
+                            <input type="hidden" name="to_watchlist" value="remove_from_watchlist"/>
+                        </div>
+                {% endif %}
+                    </form>
+            {% else %}
+                <div class="d-flex justify-content-center">
+                    <p>Want to add to watchlist?<a class="mt-2"href="{% url 'login' %}"> Log in here</a></p>
+                </div>
+            {% endif %}
+
+        </div>
+
+        <div class="col-md-6 my-col">
+            <div class="p-4">
+            
+                <p class="category badge badge-secondary mb-4">Category: {{ listing.category }}</p>
+
+
+
+                <p class="lead listing-price">Reserve Price: £{{ listing.price }}</p>
+
+                <p class="lead listing-price mb-4">Current Bid: £
+                {% if listing.price > listing.highest_bid%}
+                    {{ listing.high }}
+                {% else %}
+                    {{ listing.highest_bid }}
+                {% endif %}
+                </p>
+
+
+                <p class="font-weight-bold">Description:</p>
+
+                <p>{{listing.description}}</p>
+
+                <hr>
+                
+                {% if listing.status == "Closed" %}
+
+                <div class="alert alert-primary shadow" role="alert" style="border-left:#155724 5px solid; border-radius: 0px">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true" style="color:#155724">&times;</span>
+                    </button>
+                    <div class="row">
+                        <svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="m-1 bi bi-bell-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                        </svg>
+                        <p style="font-size:15px" class="mb-0 font-weight-light"><b class="mr-1">Alert:</b>This auction is now closed.</p>
+                    </div>
+                </div>
+
+
+
+
+                {% else %}
+
+
+                    {% if user.is_authenticated %}
+                        {% if listing.user_id == user.id %}
+                            <form action="{% url 'closelisting' %}"  method="post">
+                            {% csrf_token %}
+                                <div class="row with-margin">
+                                    <input type="hidden" name="listing_id" value="{{listing.id}}"/>
+                                    <div class="col-lg-8">
+                                        <div class="input-group ">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary ml" type="submit">Close Bid</button>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        {% else%}
+
+
+                        <form class="form-inline" action="{% url 'listing' listing.id %}" method="POST">
+                            {% csrf_token %}
+
+                                                        
+                            <div class="input-group mb-3">
+                                {{bid_form}}
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-outline-quaternary btn-primary" type="button">Place bid</button>
+                                </div>
+                            </div>
+    
+                                
+                                {% for message in messages %}
+                                    <div class="alert alert-danger shadow mt-4" role="alert" style="border-left:#721C24 5px solid; border-radius: 0px">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true" style="color:#721C24">&times;</span>
+                                        </button>
+                                        <div class="row">
+                                            <svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="m-1 bi bi-exclamation-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                                            </svg>
+                                            <p style="font-size:15px" class="mb-0 font-weight-light"><b class="mr-1">Error!</b>{{ message }}</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                        </form>
+
+                
+                        {% endif %}
+                    
+                    {% else %}
+                        <p>Please <a class="mt-2"href="{% url 'login' %}"> log in </a>to bid on this item.</p>
+
+                    {% endif %}
+                
+                {% endif %}
+
+            
+        
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row my-row d-flex justify-content-center wow fadeIn">
+        <div class="col-md-10 my-col text-center">
+            <h4 class="my-4 h5 font-weight-bold"><i class="fas fa-info-circle mr-1"></i>Additional information</h4>
+            <div class="row my-row">
+                <div class="col-md-4"><p><b><i class="fas fa-calendar-alt mr-1"></i>Date Created:</b> {{ listing.date|date}} </p></div>
+                <div class="col-md-4"><p><b><i class="fas fa-stopwatch"></i> Ends on:</b> {{listing.end_date}} </p></div>
+                <div class="col-md-4"><p><b><i class="fas fa-user mr-1"></i>Listed by:</b> {{listing.user.username}}</p></div>
+            </div>
+        </div>
+    </div>
+
+    
+    <hr>
+
+
+    <h4 class="mt-5 mb-4"><i class="fas fa-comments mr-1"></i> Comments ({{comments|length}}) </h4>
+
+    {% if user.is_authenticated %}
+
+        <form class="mb-5" action="{% url 'listing' listing.id %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-8">{{comment_form}}</div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Post Comment <i class="fas fa-comment ml-1"></i></button>
+        </form>
+    
+    {% else%}
+
+        <div>
+            <p>Please <a href="{% url 'login' %}"> log in here</a> to comment.</p>
+        </div>
+
+     {% endif %}
+
+    <div class="mb-5">
+
+        {% if not comments %}
+            No comments yet... 
+        {% else %}
+            {% for comment in comments %}
+            <strong>
+                {{comment.user}} -
+                {{comment.date_added}}
+                <br>
+            </strong>
+                {{comment.body}}
+                <br/><br/>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+    
+
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}
